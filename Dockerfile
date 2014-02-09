@@ -1,16 +1,15 @@
-FROM debian
+FROM ubuntu
 
 MAINTAINER JingleManSweep <jinglemansweep@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN echo "deb http://debian.slimdevices.com stable main" | tee -a /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get -y --force-yes upgrade
 RUN apt-get -y --force-yes install logitechmediaserver
 
-VOLUME ["/lms", "/storage"]
+EXPOSE 3483 9000 9090
 
-EXPOSE 9000
-
-ENTRYPOINT squeezeboxserver --user root --prefsdir /var/lms/prefs --logdir /var/lms/logs --cachedir /var/lms/cache
+ENTRYPOINT squeezeboxserver --user root --prefsdir /mnt/state/prefs --logdir /mnt/state/logs --cachedir /mnt/state/cache
 
 
