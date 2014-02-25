@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:precise
 
 MAINTAINER JingleManSweep <jinglemansweep@gmail.com>
 
@@ -8,8 +8,10 @@ RUN echo "deb http://debian.slimdevices.com stable main" | tee -a /etc/apt/sourc
 RUN apt-get update
 RUN apt-get -y --force-yes install logitechmediaserver
 
+ADD ./startup.sh /startup.sh
+RUN chmod u+x /startup.sh
+
 EXPOSE 3483 9000 9090
 
-ENTRYPOINT squeezeboxserver --user root --prefsdir /mnt/state/prefs --logdir /mnt/state/logs --cachedir /mnt/state/cache
-
+ENTRYPOINT ["/startup.sh"]
 
