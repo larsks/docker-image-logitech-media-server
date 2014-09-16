@@ -4,7 +4,7 @@
 
 Docker image for Logitech Media Server (SqueezeCenter, SqueezeboxServer, SlimServer)
 
-Run with:
+Run Directly:
 
 ```
 docker run -d \
@@ -12,6 +12,6 @@ docker run -d \
            -p 3483:3483 \
            -v <local-state-dir>:/mnt/state \
            -v <audio-dir>:/mnt/music \
-           logitechmediaserver
+           quay.io/jinglemansweep/logitechmediaserver
 ```
 
