@@ -1,4 +1,4 @@
-# docker-logitechmediaserver
+# Docker Container for Logitech Media Server
 
 [![Docker Repository on Quay.io](https://quay.io/repository/jinglemansweep/logitechmediaserver/status "Docker Repository on Quay.io")](https://quay.io/repository/jinglemansweep/logitechmediaserver)
 
