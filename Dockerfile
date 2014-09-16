@@ -11,6 +11,7 @@ RUN mkdir -p /var/log/supervisor
 
 COPY ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+VOLUME ["/mnt/state"]
 EXPOSE 3483 9000 9090
 
 CMD ["/usr/bin/supervisord"]
