@@ -12,6 +12,6 @@ docker run -d \
            -p 3483:3483 \
            -v <local-state-dir>:/mnt/state \
            -v <audio-dir>:/mnt/music \
-           quay.io/jinglemansweep/logitechmediaserver
+           jinglemansweep/logitechmediaserver
 ```
 
