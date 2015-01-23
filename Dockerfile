@@ -1,9 +1,9 @@
 FROM ubuntu:trusty
 MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
 
-ENV SQUEEZE_VOL=/srv/squeezebox
-ENV LANG=C.UTF-8
-ENV DEBIAN_FRONTEND=noninteractive
+ENV SQUEEZE_VOL /srv/squeezebox
+ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "deb http://debian.slimdevices.com stable main" | tee -a /etc/apt/sources.list
 RUN apt-get update && \
