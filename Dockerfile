@@ -20,4 +20,4 @@ COPY entrypoint.sh /entrypoint.sh
 COPY start-squeezebox.sh /start-squeezebox.sh
 RUN chmod 755 /entrypoint.sh /start-squeezebox.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/start-squeezebox.sh"]
+

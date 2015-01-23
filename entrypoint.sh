@@ -6,5 +6,5 @@ if [ "$SQUEEZE_VOL" ] && [ -d "$SQUEEZE_VOL" ]; then
 	done
 fi
 
-exec "$@"
+exec /start-squeezebox.sh "$@"
 
