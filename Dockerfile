@@ -28,7 +28,7 @@ RUN ln -s /usr/bin/flac /usr/share/squeezeboxserver/Bin/x86_64-linux/
 RUN ln -s /usr/bin/sox /usr/share/squeezeboxserver/Bin/x86_64-linux/
 
 VOLUME $SQUEEZE_VOL
-EXPOSE 3483 9000 9090
+EXPOSE 3483 3483/udp 9000 9090
 
 COPY entrypoint.sh /entrypoint.sh
 COPY start-squeezebox.sh /start-squeezebox.sh
