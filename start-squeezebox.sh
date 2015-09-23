@@ -1,5 +1,13 @@
 #!/bin/sh
 
+myip=$( ip addr show eth0 | awk '$1 == "inet" {print $2}' | cut -f1 -d/ )
+url="http://$myip:9000/"
+
+echo ======================================================================
+echo "$url"
+echo ======================================================================
+echo
+
 exec squeezeboxserver --user root \
 	--prefsdir $SQUEEZE_VOL/prefs \
 	--logdir $SQUEEZE_VOL/logs \
