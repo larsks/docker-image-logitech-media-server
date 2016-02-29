@@ -8,6 +8,7 @@ Run Directly:
     docker run -d \
                -p 9000:9000 \
                -p 3483:3483 \
+               -p 3483:3483/udp \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                larsks/logitech/media-server
