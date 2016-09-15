@@ -11,6 +11,6 @@ Run Directly:
                -p 3483:3483/udp \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
-               larsks/logitech/media-server
+               larsks/logitech-media-server
 
 
