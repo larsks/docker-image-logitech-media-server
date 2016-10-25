@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
 	apt-get -y --force-yes install curl wget faad flac lame sox && \
-	MEDIASERVER_URL=$(curl "http://www.mysqueezebox.com/update/?version=7.9.0&revision=1&geturl=1&os=deb") && \
+	MEDIASERVER_URL=$(curl "http://www.mysqueezebox.com/update/?version=7.9.0&revision=1&geturl=1&os=deb" | sed 's/_all\.deb/_amd64\.deb/g') && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $MEDIASERVER_URL && \
 	dpkg -i /tmp/logitechmediaserver.deb && \
 	rm -f /tmp/logitechmediaserver.deb && \
