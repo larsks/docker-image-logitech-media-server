@@ -9,6 +9,7 @@ Run Directly:
                -p 9000:9000 \
                -p 3483:3483 \
                -p 3483:3483/udp \
+               -v /etc/localtime:/etc/localtime:ro \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                larsks/logitech-media-server
