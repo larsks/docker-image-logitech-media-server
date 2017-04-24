@@ -24,30 +24,17 @@ on that port.
 
 ## Using docker-compose
 
-I run this locally using a `docker-compose.yaml` file that looks like
-this:
-
-    version: "2.3"
-
-    services:
-      squeezebox:
-        image: larsks/logitech-media-server
-        ports:
-          - "80:9000"
-          - "9000:9000"
-          - "9090:9090"
-          - "3483:3483"
-          - "3483:3483/udp"
-        volumes:
-          - /srv/music:/srv/music
-          - squeezebox:/srv/squeezebox
-          - /etc/localtime:/etc/localtime
-        restart: always
-        init: true
+There is a [docker-compose.yaml][] included in this repository that
+you will let you bring up a Logitech Media Server container using
+`docker-compose`.  The compose file includes the following:
 
     volumes:
-      squeezebox:
+      - ${AUDIO_DIR}:/srv/music
 
-Note that the above syntax will only work with version `2.2` or `2.3`
-of the compose file format, because those appear to be the only
-versions that support the `init: true` keyword.
+To provide a value for `AUDIO_DIR`, create a `.env`
+file that points `AUDIO_DIR` at the location of your music library,
+for example:
+
+    AUDIO_DIR=/home/USERNAME/Music
+
+[docker-compose.yaml]: docker-compose.yaml

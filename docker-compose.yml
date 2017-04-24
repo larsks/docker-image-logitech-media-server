@@ -1,0 +1,24 @@
+# The "init:" keyword, below, requires either version "2.2"
+# or "2.3".
+version: "2.3"
+
+services:
+  lms:
+    image: larsks/logitech-media-server
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - squeezebox:/srv/squeezebox
+      - ${AUDIO_DIR}:/srv/music
+    ports:
+## uncomment the following line if you want to be able to
+## access the web ui on port 80.
+#     - "80:9000"
+      - "9000:9000"
+      - "9090:9090"
+      - "3483:3483"
+      - "3483:3483/udp"
+    restart: always
+    init: true
+
+volumes:
+  squeezebox:
