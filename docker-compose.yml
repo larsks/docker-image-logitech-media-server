@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  lms:
+    container_name: lms
+    restart: always
+    image: larsks/logitech-media-server
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - ${CONFIG_DIR}:/srv/squeezebox
+    - ${AUDIO_DIR}:/srv/music
+    ports:
+    - "9000:9000"
+    - "9999:9090"
+    - "3483:3483"
+    - "3483:3483/udp"
