@@ -7,5 +7,5 @@ if [ "$SQUEEZE_VOL" ] && [ -d "$SQUEEZE_VOL" ]; then
 	done
 fi
 
-exec sudo -u squeezeboxserver -E /start-squeezebox.sh "$@"
+exec runuser -u squeezeboxserver -- /start-squeezebox.sh "$@"
 
