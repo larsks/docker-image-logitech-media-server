@@ -14,6 +14,9 @@ RUN apt-get update && \
 	rm -f /tmp/logitechmediaserver.deb && \
 	apt-get clean
 
+# This will be created by the entrypoint script.
+RUN userdel squeezeboxserver
+
 VOLUME $SQUEEZE_VOL
 EXPOSE 3483 3483/udp 9000 9090
 
