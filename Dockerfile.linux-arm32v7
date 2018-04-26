@@ -1,6 +1,6 @@
 FROM arm32v7/debian:stretch-slim
 MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
-
+ 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
