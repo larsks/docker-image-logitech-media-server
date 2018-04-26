@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM amd64/debian:stretch-slim
 MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
 
 ENV SQUEEZE_VOL /srv/squeezebox
