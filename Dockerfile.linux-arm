@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV PACKAGE_VERSION_URL=http://www.mysqueezebox.com/update/?version=7.9.0&revision=1&geturl=1&os=deb
 
 RUN apt-get update && \
-	apt-get install -y curl wget faad flac lame sox libio-socket-ssl-perl && \
-	apt-get clean
+    apt-get -y install curl wget faad flac lame sox libio-socket-ssl-perl && \
+    apt-get clean
 
 RUN url=$(curl "$PACKAGE_VERSION_URL" | sed 's/_all\.deb/_amd64\.deb/') && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $url && \
