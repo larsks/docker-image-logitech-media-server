@@ -23,7 +23,7 @@ script:
       tar xzf qemu-arm-static.tar.gz &&
       popd
   
-    - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm32v7 -f Dockerfile.linux-arm32v7 .
+      - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm32v7 -f Dockerfile.linux-arm32v7 .
 
   - >
     if [ -n "$TRAVIS_TAG" ]; then
