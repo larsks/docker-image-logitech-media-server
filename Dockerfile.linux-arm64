@@ -1,5 +1,5 @@
 FROM arm64v8/debian:stretch-slim
-COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
+COPY tmp/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
