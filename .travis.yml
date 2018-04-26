@@ -23,22 +23,23 @@ script:
       tar xzf qemu-arm-static.tar.gz &&
       popd
   
-      - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm32v7 -f Dockerfile.linux-arm32v7 .
+  - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm32v7 -f Dockerfile.linux-arm32v7 .
+  
   - >
   
-  if [ -n "$TRAVIS_TAG" ]; then
-    # Push all images
-    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-    docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-    docker tag raymondmm/logitech-media-server:linux-arm32v7 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
-    # push version for each platform
-    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
-    # Download manifest-tool
-    wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
-    mv manifest-tool-linux-amd64 manifest-tool
-    chmod +x manifest-tool
-    # Push manifest-list
-    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:$TRAVIS_TAG"
-    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:latest"
-  fi
+    if [ -n "$TRAVIS_TAG" ]; then
+      # Push all images
+      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+      docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+      docker tag raymondmm/logitech-media-server:linux-arm32v7 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
+      # push version for each platform
+      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
+      # Download manifest-tool
+      wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
+      mv manifest-tool-linux-amd64 manifest-tool
+      chmod +x manifest-tool
+      # Push manifest-list
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:$TRAVIS_TAG"
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:latest"
+    fi
