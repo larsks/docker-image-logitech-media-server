@@ -10,8 +10,15 @@ before_install:
   - sudo service docker stop
   - curl -fsSL https://get.docker.com/ | sudo sh
   
-  # Prepare qemu
+  # prepare qemu
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  # get qemu-arm-static binary
+  - mkdir tmp
+  - >
+    pushd tmp &&
+    curl -L -o qemu-arm-static.tar.gz https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1-1/qemu-arm-static.tar.gz &&
+    tar xzf qemu-arm-static.tar.gz &&
+    popd
 
 script:
   # Build all images
