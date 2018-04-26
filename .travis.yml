@@ -23,7 +23,7 @@ script:
       tar xzf qemu-arm-static.tar.gz &&
       popd
   
-  - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm32v7 -f Dockerfile.linux-arm32v7 .
+  - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm -f Dockerfile.linux-arm .
   
   - >
   
@@ -31,10 +31,10 @@ script:
       # Push all images
       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
       docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-      docker tag raymondmm/logitech-media-server:linux-arm32v7 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
+      docker tag raymondmm/logitech-media-server:linux-arm raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
       # push version for each platform
       docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm32v7
+      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
       # Download manifest-tool
       wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
       mv manifest-tool-linux-amd64 manifest-tool
