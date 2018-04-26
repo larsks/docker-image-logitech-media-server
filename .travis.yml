@@ -10,9 +10,9 @@ before_install:
   - sudo service docker stop
   - curl -fsSL https://get.docker.com/ | sudo sh
   
-  # prepare qemu
+  # Prepare qemu
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  # get qemu-arm-static binary
+  # Get qemu-arm-static binary
   - mkdir tmp
   - >
     pushd tmp &&
@@ -22,23 +22,28 @@ before_install:
 
 script:
   # Build all images
-  #- docker build --build-arg PLATFORM=linux-amd64 -t raymondmm/logitech-media-server:linux-amd64 -f Dockerfile.linux-amd64 .
-  - docker build --no-cache --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm -f Dockerfile.linux-arm .
+  - docker build --build-arg PLATFORM=linux-amd64 -t raymondmm/logitech-media-server:linux-amd64 -f Dockerfile.linux-amd64 .
+  - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm -f Dockerfile.linux-arm .
   
-#after_success:
-#  - if [ -n "$TRAVIS_TAG" ]; then
-#    # Push all images
-#    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-#    docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-#    docker tag raymondmm/logitech-media-server:linux-arm raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
-#    # push version for each platform
-#    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-#    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
-#    # Download manifest-tool
-#    wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
-#    mv manifest-tool-linux-amd64 manifest-tool
-#   chmod +x manifest-tool
-#    # Push manifest-list
-#    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:$TRAVIS_TAG"
-#    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:latest"
-#    fi
+after_success:
+  - if [ -n "$TRAVIS_TAG" ]; then
+    # Docker login
+    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+    
+    # Docker Tag
+    docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+    docker tag raymondmm/logitech-media-server:linux-arm raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
+    
+    # Docker Push
+    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+    docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
+    
+    # Download manifest-tool
+    wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
+    mv manifest-tool-linux-amd64 manifest-tool
+    chmod +x manifest-tool
+    
+    # Create and push manifest-list
+    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:$TRAVIS_TAG"
+    ./manifest-tool push from-args --platforms linux/amd64,linux/arm --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:latest"
+    fi
