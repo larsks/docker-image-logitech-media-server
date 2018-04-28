@@ -15,7 +15,7 @@ RUN apt-get update && \
     && apt-get clean
 
 # Download and install nightly
-RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_7.9.2~1524841547_arm.deb' ${PACKAGE_URL} && \
+RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_${PACKAGE_VERSION}_arm.deb' ${PACKAGE_URL} && \
     mv logitechmediaserver_*_arm.deb /tmp/logitechmediaserver.deb && \
     dpkg -i /tmp/logitechmediaserver.deb && \
     rm -f /tmp/logitechmediaserver.deb && \
