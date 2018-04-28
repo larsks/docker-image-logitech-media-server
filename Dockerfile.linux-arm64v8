@@ -6,6 +6,7 @@ ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 ENV PACKAGE_URL=http://downloads-origin.slimdevices.com/nightly/?ver=7.9
 ENV PACKAGE_VERSION=7.9.2~1524841547
+ENV ARCH=arm
 
 # Install requirements and utilities
 RUN apt-get update && \
@@ -15,8 +16,8 @@ RUN apt-get update && \
     && apt-get clean
 
 # Download and install nightly
-RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_'${PACKAGE_VERSION}'_arm.deb' ${PACKAGE_URL} && \
-    mv logitechmediaserver_*_arm.deb /tmp/logitechmediaserver.deb && \
+RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_'${PACKAGE_VERSION}'_'${ARCH}'.deb' ${PACKAGE_URL} && \
+    mv logitechmediaserver_${PACKAGE_VERSION}_${ARCH}.deb /tmp/logitechmediaserver.deb && \
     dpkg -i /tmp/logitechmediaserver.deb && \
     rm -f /tmp/logitechmediaserver.deb && \
     apt-get clean
