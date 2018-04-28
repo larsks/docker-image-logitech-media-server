@@ -16,7 +16,7 @@ RUN apt-get update && \
 # Download lastest nightly
 RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_*_arm.deb' ${PACKAGE_URL} && \
     PACKAGE_VERSION=$(ls | sed 's/.*_\(.*\)_.*/\1/') && \
-    mv logitechmediaserver_*_arm.deb \tmp\logitechmediaserver.deb
+    mv logitechmediaserver_*_arm.deb /tmp/logitechmediaserver.deb
 
 # Install package
 RUN echo "${PACKAGE_VERSION}" && \
