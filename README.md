@@ -5,12 +5,12 @@ This is a Docker image for running the Logitech Media Server package
 
 Run Directly:
 
-    docker run -d --init \
-               -p 9000:9000 \
+    docker run -p 9000:9000 \
                -p 9090:9090 \
                -p 3483:3483 \
                -p 3483:3483/udp \
                -v /etc/localtime:/etc/localtime:ro \
+               -v /etc/timezone:/etc/timezone:ro \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                larsks/logitech-media-server
