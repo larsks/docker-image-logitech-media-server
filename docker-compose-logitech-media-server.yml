@@ -14,7 +14,7 @@ services:
       - "3483:3483"
       - "3483:3483/udp"
     volumes:
-      - ${SQUEEZEBOX_PERSISTENT_DIR}:/srv/squeezebox
+      - <SQUEEZEBOX_PERSISTENT_DIR>:/srv/squeezebox
       - ${AUDIO_DIR}:/srv/music
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
