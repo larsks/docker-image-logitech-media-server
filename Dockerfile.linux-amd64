@@ -1,5 +1,6 @@
 FROM amd64/debian:stretch-slim
-MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
+LABEL maintainer="Lars Kellogg-Stedman <lars@oddbit.com>"
+LABEL maintainer="Raymond M Mouthaan <raymondmmouthaan@gmail.com>"
 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
