@@ -1,0 +1,25 @@
+################################################################################
+# Logitech-Media-Server aka Slimserver
+################################################################################
+#$ docker stack deploy logitech-media-server --compose-file docker-compose-logitech-media-server.yml
+################################################################################
+version: "3.6"
+
+services:
+  logitech-media-server:
+    image: larsks/logitech-media-server
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+      - "3483:3483"
+      - "3483:3483/udp"
+    volumes:
+      - ${SQUEEZEBOX_PERSISTENT_DIR}:/srv/squeezebox
+      - ${AUDIO_DIR}:/srv/music
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+   
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
