@@ -24,9 +24,9 @@ before_install:
 
 script:
   # Build all images
-  - docker build --build-arg PLATFORM=linux-amd64 -t raymondmm/logitech-media-server:linux-amd64 -f Dockerfile.linux-amd64 .
-  - docker build --build-arg PLATFORM=linux-arm -t raymondmm/logitech-media-server:linux-arm -f Dockerfile.linux-arm32v7 .
-  - docker build --build-arg PLATFORM=linux-arm64 -t raymondmm/logitech-media-server:linux-arm64 -f Dockerfile.linux-arm64v8 .
+  - docker build --build-arg PLATFORM=linux-amd64 -t larsks/logitech-media-server:linux-amd64 -f Dockerfile.linux-amd64 .
+  - docker build --build-arg PLATFORM=linux-arm -t larsks/logitech-media-server:linux-arm -f Dockerfile.linux-arm32v7 .
+  - docker build --build-arg PLATFORM=linux-arm64 -t larsks/logitech-media-server:linux-arm64 -f Dockerfile.linux-arm64v8 .
   
 after_success:
   - > 
@@ -35,14 +35,14 @@ after_success:
       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
       
       # Docker Tag
-      docker tag raymondmm/logitech-media-server:linux-amd64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-      docker tag raymondmm/logitech-media-server:linux-arm raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
-      docker tag raymondmm/logitech-media-server:linux-arm64 raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm64
+      docker tag larsks/logitech-media-server:linux-amd64 larsks/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+      docker tag larsks/logitech-media-server:linux-arm larsks/logitech-media-server:${TRAVIS_TAG}-linux-arm
+      docker tag larsks/logitech-media-server:linux-arm64 larsks/logitech-media-server:${TRAVIS_TAG}-linux-arm64
       
       # Docker Push
-      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-amd64
-      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm
-      docker push raymondmm/logitech-media-server:${TRAVIS_TAG}-linux-arm64
+      docker push larsks/logitech-media-server:${TRAVIS_TAG}-linux-amd64
+      docker push larsks/logitech-media-server:${TRAVIS_TAG}-linux-arm
+      docker push larsks/logitech-media-server:${TRAVIS_TAG}-linux-arm64
       
       # Download manifest-tool
       wget https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64
@@ -50,6 +50,6 @@ after_success:
       chmod +x manifest-tool
       
       # Create and push manifest-list
-      ./manifest-tool push from-args --platforms linux/amd64,linux/arm,linux/arm64 --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:$TRAVIS_TAG"
-      ./manifest-tool push from-args --platforms linux/amd64,linux/arm,linux/arm64 --template "raymondmm/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "raymondmm/logitech-media-server:latest"
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm,linux/arm64 --template "larsks/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "larsks/logitech-media-server:$TRAVIS_TAG"
+      ./manifest-tool push from-args --platforms linux/amd64,linux/arm,linux/arm64 --template "larsks/logitech-media-server:${TRAVIS_TAG}-OS-ARCH" --target "larsks/logitech-media-server:latest"
     fi
