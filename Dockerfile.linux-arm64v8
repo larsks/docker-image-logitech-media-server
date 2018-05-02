@@ -1,6 +1,9 @@
 FROM arm64v8/debian:stretch-slim
 COPY tmp/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
+LABEL maintainer="Lars Kellogg-Stedman <lars@oddbit.com>"
+LABEL maintainer="Raymond M Mouthaan <raymondmmouthaan@gmail.com>"
+
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
