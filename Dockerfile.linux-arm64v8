@@ -1,0 +1,37 @@
+FROM arm64v8/debian:stretch-slim
+COPY tmp/qemu-aarch64-static /usr/bin/qemu-aarch64-static
+
+LABEL maintainer="Lars Kellogg-Stedman <lars@oddbit.com>"
+LABEL maintainer="Raymond M Mouthaan <raymondmmouthaan@gmail.com>"
+
+ENV SQUEEZE_VOL /srv/squeezebox
+ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+ENV PACKAGE_URL=http://downloads-origin.slimdevices.com/nightly/?ver=7.9
+ENV PACKAGE_VERSION=7.9.2~1524841547
+ENV ARCH=arm
+
+# Install requirements and utilities
+RUN apt-get update && \
+    apt-get -y install curl wget nano faad flac lame sox libio-socket-ssl-perl \
+    iputils-ping \
+    iproute2 \
+    && apt-get clean
+
+# Download and install nightly
+RUN wget -r --no-directories --no-parent -A 'logitechmediaserver_'${PACKAGE_VERSION}'_'${ARCH}'.deb' ${PACKAGE_URL} && \
+    mv logitechmediaserver_${PACKAGE_VERSION}_${ARCH}.deb /tmp/logitechmediaserver.deb && \
+    dpkg -i /tmp/logitechmediaserver.deb && \
+    rm -f /tmp/logitechmediaserver.deb && \
+    apt-get clean
+
+# This will be created by the entrypoint script.
+RUN userdel squeezeboxserver
+
+VOLUME $SQUEEZE_VOL
+EXPOSE 3483 3483/udp 9000 9090
+
+COPY entrypoint.sh /entrypoint.sh
+COPY start-squeezebox.sh /start-squeezebox.sh
+RUN chmod 755 /entrypoint.sh /start-squeezebox.sh
+ENTRYPOINT ["/entrypoint.sh"]

@@ -5,12 +5,12 @@ This is a Docker image for running the Logitech Media Server package
 
 Run Directly:
 
-    docker run -d --init \
-               -p 9000:9000 \
+    docker run -p 9000:9000 \
                -p 9090:9090 \
                -p 3483:3483 \
                -p 3483:3483/udp \
                -v /etc/localtime:/etc/localtime:ro \
+               -v /etc/timezone:/etc/timezone:ro \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                larsks/logitech-media-server
@@ -24,7 +24,7 @@ on that port.
 
 ## Using docker-compose
 
-There is a [docker-compose.yaml][] included in this repository that
+There is a [docker-compose-logitech-media-server.yml][] included in this repository that
 you will let you bring up a Logitech Media Server container using
 `docker-compose`.  The compose file includes the following:
 
@@ -37,4 +37,4 @@ for example:
 
     AUDIO_DIR=/home/USERNAME/Music
 
-[docker-compose.yaml]: docker-compose.yaml
+[docker-compose-logitech-media-server.yml]: docker-compose-logitech-media-server.yml
