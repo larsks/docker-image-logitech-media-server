@@ -24,7 +24,7 @@ on that port.
 
 ## Using docker-compose
 
-There is a [docker-compose-logitech-media-server.yaml][] included in this repository that
+There is a [docker-compose-logitech-media-server.yml][] included in this repository that
 you will let you bring up a Logitech Media Server container using
 `docker-compose`.  The compose file includes the following:
 
@@ -37,4 +37,4 @@ for example:
 
     AUDIO_DIR=/home/USERNAME/Music
 
-[docker-compose-logitech-media-server.yaml]: docker-compose-logitech-media-server.yaml
+[docker-compose-logitech-media-server.yml]: docker-compose-logitech-media-server.yml
