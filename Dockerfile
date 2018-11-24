@@ -4,10 +4,19 @@ MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ARG PACKAGE_URL=http://downloads-origin.slimdevices.com/nightly/7.9/sc/acac84f6747e927149c62b198403ac47a9df3f58/logitechmediaserver_7.9.2~1533559127_all.deb
+ARG PACKAGE_URL=http://downloads-origin.slimdevices.com/nightly/7.9/sc/81275414b6a26d6bb36898d833605b5a6d707421/logitechmediaserver_7.9.2~1542807489_all.deb
 
 RUN apt-get update && \
-	apt-get -y install curl wget faad flac lame sox libio-socket-ssl-perl && \
+	apt-get -y install \
+		curl \
+		wget \
+		faad \
+		flac \
+		lame \
+		sox \
+		libio-socket-ssl-perl \
+		tzdata \
+		&& \
 	apt-get clean
 
 RUN curl -Lsf -o /tmp/lms.deb $PACKAGE_URL && \
