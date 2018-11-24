@@ -7,7 +7,16 @@ ENV DEBIAN_FRONTEND noninteractive
 ARG PACKAGE_URL={{ url }}
 
 RUN apt-get update && \
-	apt-get -y install curl wget faad flac lame sox libio-socket-ssl-perl && \
+	apt-get -y install \
+		curl \
+		wget \
+		faad \
+		flac \
+		lame \
+		sox \
+		libio-socket-ssl-perl \
+		tzdata \
+		&& \
 	apt-get clean
 
 RUN curl -Lsf -o /tmp/lms.deb $PACKAGE_URL && \
