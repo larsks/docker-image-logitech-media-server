@@ -1,1 +1,7 @@
 .env
+qemu-aarch64-static
+qemu-arm-static
+qemu-x86_64-static
+Dockerfile.amd64
+Dockerfile.arm32v7
+Dockerfile.arm64v8
