@@ -1,0 +1,15 @@
+sudo: required
+
+language: bash
+
+services:
+  - docker
+
+before_install:
+  - sudo service docker stop
+  - curl -fsSL https://get.docker.com/  | sudo sh
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  - ./prepare.sh
+
+script:
+   - ./build.sh

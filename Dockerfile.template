@@ -1,5 +1,7 @@
-FROM ubuntu:xenial
+FROM __BASEIMAGE_ARCH__/ubuntu:xenial
 MAINTAINER Lars Kellogg-Stedman <lars@oddbit.com>
+
+__CROSS_COPY qemu-__QEMU_ARCH__-static /usr/bin/
 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
@@ -19,7 +21,7 @@ RUN apt-get update && \
 		&& \
 	apt-get clean
 
-RUN url=$(curl "$PACKAGE_VERSION_URL" | sed 's/_all\.deb/_amd64\.deb/') && \
+RUN url=$(curl "$PACKAGE_VERSION_URL") && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $url && \
 	dpkg -i /tmp/logitechmediaserver.deb && \
 	rm -f /tmp/logitechmediaserver.deb && \

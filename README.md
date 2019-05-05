@@ -38,3 +38,37 @@ for example:
     AUDIO_DIR=/home/USERNAME/Music
 
 [docker-compose.yaml]: docker-compose.yaml
+
+## Image building process
+
+### Register QEMU binfmt_misc handlers
+
+Register `qemu-*-static` for all supported processors (except the current one) as `binfmt_misc` handlers. You only need to do this once.
+
+```
+docker run --rm --privileged multiarch/qemu-user-static:register
+```
+
+In case you get an error message, try again with first removing all registered `binfmt_misc` handlers.
+
+```
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+```
+
+### Prepare Build
+To prepare the build download the required QEMU static user binaries.
+
+```
+./prepare.sh
+```
+
+### Build Docker images
+Docker images for all supported platforms are built one after the other.
+
+```
+./build.sh
+```
+
+### References
+- [HomeOps - Building multi-arch docker images](https://lobradov.github.io/Building-docker-multiarch-images/)
+- [How to Build ARM Docker Images on Intel host](http://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/)
